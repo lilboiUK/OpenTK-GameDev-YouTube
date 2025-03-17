@@ -5,8 +5,8 @@ namespace OpenTK_Game;
 
 public class Shader
 {
-    protected readonly int Handle;
-    protected readonly int TransformUniformLocation;
+    private readonly int _handle;
+    private readonly int _transformUniformLocation;
 
     public Shader(string vertexPath, string fragmentPath)
     {
@@ -28,20 +28,20 @@ public class Shader
         CheckShaderCompilation(fragmentShader);
 
         // Link
-        Handle = GL.CreateProgram();
-        GL.AttachShader(Handle, vertexShader);
-        GL.AttachShader(Handle, fragmentShader);
-        GL.LinkProgram(Handle);
-        CheckProgramLinkStatus(Handle);
+        _handle = GL.CreateProgram();
+        GL.AttachShader(_handle, vertexShader);
+        GL.AttachShader(_handle, fragmentShader);
+        GL.LinkProgram(_handle);
+        CheckProgramLinkStatus(_handle);
 
         // Cleanup
-        GL.DetachShader(Handle, vertexShader);
-        GL.DetachShader(Handle, fragmentShader);
+        GL.DetachShader(_handle, vertexShader);
+        GL.DetachShader(_handle, fragmentShader);
         GL.DeleteShader(vertexShader);
         GL.DeleteShader(fragmentShader);
         
-        GL.UseProgram(Handle);
-        TransformUniformLocation = GL.GetUniformLocation(Handle, "transform");
+        GL.UseProgram(_handle);
+        _transformUniformLocation = GL.GetUniformLocation(_handle, "transform");
     }
 
     private void CheckShaderCompilation(int shader)
@@ -60,14 +60,36 @@ public class Shader
         throw new Exception($"Shader program linking failed: {infoLog}");
     }
 
-    public virtual void Use(Matrix4 modelMatrix)
+    public void Use(Matrix4 modelMatrix)
     {
-        GL.UseProgram(Handle);
-        GL.UniformMatrix4(TransformUniformLocation, true, ref modelMatrix);
+        GL.UseProgram(_handle);
+        GL.UniformMatrix4(_transformUniformLocation, true, ref modelMatrix);
+    }
+
+    public int GetUniformsCount()
+    {
+        GL.GetProgram(_handle, GetProgramParameterName.ActiveUniforms, out var uniformCount);
+        return uniformCount;
+    }
+
+    public string GetUniformName(int index)
+    {
+        return GL.GetActiveUniform(_handle, index, out _, out _);
+    }
+
+    public ActiveUniformType GetActiveUniformType(int index)
+    {
+        GL.GetActiveUniform(_handle, index, out _, out var activeUniformType);
+        return activeUniformType;
+    }
+
+    public int GetUniformLocation(string name)
+    {
+        return GL.GetUniformLocation(_handle, name);
     }
 
     public void Dispose()
     {
-        GL.DeleteProgram(Handle);
+        GL.DeleteProgram(_handle);
     }
 }

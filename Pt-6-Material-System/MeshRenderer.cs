@@ -9,8 +9,8 @@ public class MeshRenderer(GameObject gameObject) : Component(gameObject)
     private int _vertexBufferObject;
     private int _vertexArrayObject;
     private int _elementBufferObject;
-    
-    public Shader? Shader;
+
+    public Material? Material;
 
     public Mesh? Mesh
     {
@@ -45,9 +45,9 @@ public class MeshRenderer(GameObject gameObject) : Component(gameObject)
 
     public void Render()
     {
-        if(Shader == null || _mesh == null) return;
+        if(Material == null || _mesh == null) return;
         
-        Shader.Use(GameObject.Transform.GetModelMatrix());
+        Material.Apply(GameObject.Transform.GetModelMatrix());
         GL.BindVertexArray(_vertexArrayObject);
         GL.DrawElements(PrimitiveType.Triangles, _mesh.Indices.Length, DrawElementsType.UnsignedInt, 0);
     }
