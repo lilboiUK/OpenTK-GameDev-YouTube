@@ -9,20 +9,22 @@ public class MaterialProperty
     {
         { typeof(Vector4), Vector4.One },
         { typeof(Matrix4), Matrix4.Identity },
+        { typeof(Texture), Texture.DefaultTexture() },
+        { typeof(bool), false }
     };
-    
+
     private object _value;
     
     public string Name { get; private set; }
     public int ShaderUniformLocation { get; private set; }
-    public Type PropertyType { get; private set; }
-
+    public Type PropertyType { get; }
+    
     public object Value
     {
         get => _value;
         set
         {
-            if(value == null || value.GetType() != PropertyType)
+            if (value == null || value.GetType() != PropertyType)
                 throw new ArgumentException($"MaterialProperty.Value: Value must be of type {PropertyType}");
             _value = value;
         }
@@ -36,6 +38,14 @@ public class MaterialProperty
         _value = GetDefaultValue();
     }
 
+    private object GetDefaultValue()
+    {
+        if (DefaultValues.TryGetValue(PropertyType, out var defaultValue))
+            return defaultValue;
+        throw new NotImplementedException(
+            $"MaterialProperty.GetDefaultValue(): Unsupported property type: {PropertyType}");
+    }
+
     private static Type GetPropertyType(ActiveUniformType activeUniformType)
     {
         return activeUniformType switch
@@ -43,14 +53,9 @@ public class MaterialProperty
             ActiveUniformType.DoubleVec4 => typeof(Vector4),
             ActiveUniformType.FloatVec4 => typeof(Vector4),
             ActiveUniformType.FloatMat4 => typeof(Matrix4),
-            _ => throw new ArgumentException($"MaterialProperty.GetPropertyType(): Unsupported ActiveUniformType: {activeUniformType}"),
+            ActiveUniformType.Sampler2D => typeof(Texture),
+            _ => throw new NotImplementedException(
+                $"MaterialProperty.GetPropertyType(): Unsupported ActiveUniformType type: {activeUniformType}")
         };
-    }
-
-    private object GetDefaultValue()
-    {
-        if(DefaultValues.TryGetValue(PropertyType, out var defaultValue))
-            return defaultValue;
-        throw new NotImplementedException($"MaterialProperty.GetDefaultValue(): Unsupported property type: {PropertyType}");
     }
 }

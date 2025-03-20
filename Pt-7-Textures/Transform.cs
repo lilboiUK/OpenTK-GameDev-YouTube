@@ -1,4 +1,5 @@
 using OpenTK.Mathematics;
+
 namespace OpenTK_Game;
 
 public class Transform(GameObject gameObject) : Component(gameObject)
@@ -12,7 +13,7 @@ public class Transform(GameObject gameObject) : Component(gameObject)
         var scale = Matrix4.CreateScale(Scale);
         var rotation = Matrix4.CreateFromQuaternion(Rotation);
         var translation = Matrix4.CreateTranslation(Position);
-        
+
         return translation * rotation * scale;
     }
 }

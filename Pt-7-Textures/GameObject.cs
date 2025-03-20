@@ -3,10 +3,6 @@ namespace OpenTK_Game;
 public class GameObject
 {
     private readonly List<Component> _components = [];
-    
-    public Transform Transform { get; }
-
-    public bool IsActive { get; private set; } = true;
 
     public GameObject()
     {
@@ -14,9 +10,13 @@ public class GameObject
         _components.Add(Transform);
     }
 
+    public Transform Transform { get; }
+
+    public bool IsActive { get; private set; } = true;
+
     public void SetActive(bool value)
     {
-        if(IsActive == value) return;
+        if (IsActive == value) return;
         IsActive = value;
         foreach (var component in _components)
             component.IsEnabled = value;
@@ -24,9 +24,9 @@ public class GameObject
 
     public T AddComponent<T>() where T : Component
     {
-        if (typeof(T) == typeof(Transform)) 
+        if (typeof(T) == typeof(Transform))
             throw new InvalidOperationException("GameObject already has a component of type Transform");
-        
+
         var component = (T)Activator.CreateInstance(typeof(T), this)!;
         _components.Add(component);
         if (IsActive) component.IsEnabled = true;
@@ -38,21 +38,18 @@ public class GameObject
     {
         if (typeof(T) == typeof(Transform))
             throw new InvalidOperationException("Cannot remove a component of type Transform");
-        
+
         var component = GetComponent<T>();
-        if(component == null) return;
+        if (component == null) return;
         component.OnDestroy();
         _components.Remove(component);
     }
-    
+
     public void RemoveComponent(Component component)
     {
-        if (component == Transform)
-        {
-            throw new InvalidOperationException("Cannot remove a component of type Transform");
-        }
-        
-        if(!_components.Contains(component)) return;
+        if (component == Transform) throw new InvalidOperationException("Cannot remove a component of type Transform");
+
+        if (!_components.Contains(component)) return;
         component.OnDestroy();
         _components.Remove(component);
     }
@@ -69,7 +66,7 @@ public class GameObject
 
     public void Update()
     {
-        if(!IsActive) return;
+        if (!IsActive) return;
         foreach (var component in _components.Where(component => component.IsEnabled)) component.Update();
     }
 }

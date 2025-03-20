@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "/home/frank/Desktop/code/c#/OpenTK-GameDev-YouTube/Pt-6-Material-System/OpenTK-Game.csproj": {}
+    "/home/frank/Desktop/code/c#/OpenTK-GameDev-YouTube/Pt-7-Textures/OpenTK-Game.csproj": {}
   },
   "projects": {
-    "/home/frank/Desktop/code/c#/OpenTK-GameDev-YouTube/Pt-6-Material-System/OpenTK-Game.csproj": {
+    "/home/frank/Desktop/code/c#/OpenTK-GameDev-YouTube/Pt-7-Textures/OpenTK-Game.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/home/frank/Desktop/code/c#/OpenTK-GameDev-YouTube/Pt-6-Material-System/OpenTK-Game.csproj",
+        "projectUniqueName": "/home/frank/Desktop/code/c#/OpenTK-GameDev-YouTube/Pt-7-Textures/OpenTK-Game.csproj",
         "projectName": "OpenTK-Game",
-        "projectPath": "/home/frank/Desktop/code/c#/OpenTK-GameDev-YouTube/Pt-6-Material-System/OpenTK-Game.csproj",
+        "projectPath": "/home/frank/Desktop/code/c#/OpenTK-GameDev-YouTube/Pt-7-Textures/OpenTK-Game.csproj",
         "packagesPath": "/home/frank/.nuget/packages/",
-        "outputPath": "/home/frank/Desktop/code/c#/OpenTK-GameDev-YouTube/Pt-6-Material-System/obj/",
+        "outputPath": "/home/frank/Desktop/code/c#/OpenTK-GameDev-YouTube/Pt-7-Textures/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "/home/frank/.nuget/NuGet/NuGet.Config"
@@ -47,6 +47,10 @@
             "OpenTK": {
               "target": "Package",
               "version": "[4.9.3, )"
+            },
+            "StbImageSharp": {
+              "target": "Package",
+              "version": "[2.30.15, )"
             }
           },
           "imports": [

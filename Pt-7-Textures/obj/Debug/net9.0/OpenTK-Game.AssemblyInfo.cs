@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("OpenTK-Game")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+198b22ff318cb3bc6e1ae5bc9de187ba3faa5ca1")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+d875724bfe46343d56150cf306b8b21673e1271d")]
 [assembly: System.Reflection.AssemblyProductAttribute("OpenTK-Game")]
 [assembly: System.Reflection.AssemblyTitleAttribute("OpenTK-Game")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

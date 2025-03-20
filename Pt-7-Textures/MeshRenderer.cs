@@ -4,50 +4,47 @@ namespace OpenTK_Game;
 
 public class MeshRenderer(GameObject gameObject) : Component(gameObject)
 {
-    private Mesh? _mesh;
-    
-    private int _vertexBufferObject;
-    private int _vertexArrayObject;
     private int _elementBufferObject;
+    private Material? _material;
+    private Mesh? _mesh;
+    private int _vertexArrayObject;
+    private int _vertexBufferObject;
 
-    public Material? Material;
-
-    public Mesh? Mesh
+    public void Init(Material material, Mesh mesh)
     {
-        get => _mesh;
-        set
-        {
-            _mesh = value;
-            InitMesh();
-        }
-    }
+        _material = material;
+        _mesh = mesh;
 
-    private void InitMesh()
-    {
-        if(_mesh == null) return;
-        
         _vertexArrayObject = GL.GenVertexArray();
         GL.BindVertexArray(_vertexArrayObject);
 
         _vertexBufferObject = GL.GenBuffer();
         GL.BindBuffer(BufferTarget.ArrayBuffer, _vertexBufferObject);
-        GL.BufferData(BufferTarget.ArrayBuffer, _mesh.Vertices.Length * sizeof(float), _mesh.Vertices, BufferUsageHint.StaticDraw);
+        GL.BufferData(BufferTarget.ArrayBuffer, _mesh.Vertices.Length * sizeof(float), _mesh.Vertices,
+            BufferUsageHint.StaticDraw);
 
         _elementBufferObject = GL.GenBuffer();
         GL.BindBuffer(BufferTarget.ElementArrayBuffer, _elementBufferObject);
-        GL.BufferData(BufferTarget.ElementArrayBuffer, _mesh.Indices.Length * sizeof(uint), _mesh.Indices, BufferUsageHint.StaticDraw);
+        GL.BufferData(BufferTarget.ElementArrayBuffer, _mesh.Indices.Length * sizeof(uint), _mesh.Indices,
+            BufferUsageHint.StaticDraw);
 
-        GL.VertexAttribPointer(0, 3, VertexAttribPointerType.Float, false, 3 * sizeof(float), 0);
-        GL.EnableVertexAttribArray(0);
+        var vertexLocation = _material.Shader.GetAttribLocation("aPosition");
+        GL.EnableVertexAttribArray(vertexLocation);
+        GL.VertexAttribPointer(vertexLocation, 3, VertexAttribPointerType.Float, false, 5 * sizeof(float), 0);
+
+        var texCoordLocation = _material.Shader.GetAttribLocation("aTexCoord");
+        GL.EnableVertexAttribArray(texCoordLocation);
+        GL.VertexAttribPointer(texCoordLocation, 2, VertexAttribPointerType.Float, false, 5 * sizeof(float),
+            3 * sizeof(float));
 
         GL.BindVertexArray(0);
     }
 
     public void Render()
     {
-        if(Material == null || _mesh == null) return;
-        
-        Material.Apply(GameObject.Transform.GetModelMatrix());
+        if (_material == null || _mesh == null) return;
+
+        _material.Apply(GameObject.Transform.GetModelMatrix());
         GL.BindVertexArray(_vertexArrayObject);
         GL.DrawElements(PrimitiveType.Triangles, _mesh.Indices.Length, DrawElementsType.UnsignedInt, 0);
     }
