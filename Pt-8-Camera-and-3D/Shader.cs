@@ -6,7 +6,7 @@ namespace OpenTK_Game;
 public class Shader
 {
     private readonly int _handle;
-    private readonly int _transformUniformLocation;
+    private readonly int _mvpUniformLocation;
 
     public Shader(string vertexPath, string fragmentPath)
     {
@@ -41,7 +41,7 @@ public class Shader
         GL.DeleteShader(fragmentShader);
 
         GL.UseProgram(_handle);
-        _transformUniformLocation = GL.GetUniformLocation(_handle, "transform");
+        _mvpUniformLocation = GL.GetUniformLocation(_handle, "modelViewProjectionMatrix");
     }
 
     private static void CheckShaderCompileStatus(int shader)
@@ -60,10 +60,10 @@ public class Shader
         throw new Exception($"Shader program linking failed: {infoLog}");
     }
 
-    public void Use(Matrix4 modelMatrix)
+    public void Use(Matrix4 modelViewProjectionMatrix)
     {
         GL.UseProgram(_handle);
-        GL.UniformMatrix4(_transformUniformLocation, true, ref modelMatrix);
+        GL.UniformMatrix4(_mvpUniformLocation, true, ref modelViewProjectionMatrix);
     }
 
     public int GetUniformsCount()

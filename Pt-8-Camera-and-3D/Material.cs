@@ -40,9 +40,9 @@ public class Material
         }
     }
 
-    public void Apply(Matrix4 modelMatrix)
+    public void Apply(Matrix4 modelViewProjectionMatrix)
     {
-        Shader.Use(modelMatrix);
+        Shader.Use(modelViewProjectionMatrix);
 
         foreach (var materialProperty in _materialProperties)
         {

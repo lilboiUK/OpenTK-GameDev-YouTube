@@ -3,7 +3,8 @@ namespace OpenTK_Game;
 public class Component(GameObject gameObject)
 {
     private bool _isEnabled = true;
-    public GameObject GameObject { get; private set; } = gameObject;
+    public readonly GameObject GameObject = gameObject;
+    public readonly Transform Transform = gameObject.Transform;
     
     public bool IsEnabled
     {

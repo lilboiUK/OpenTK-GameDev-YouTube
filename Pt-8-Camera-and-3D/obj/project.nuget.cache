@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "8KGfWgwP5Bc=",
+  "dgSpecHash": "nBZ9Q9LglYc=",
   "success": true,
-  "projectFilePath": "/home/frank/Desktop/code/c#/OpenTK-GameDev-YouTube/Pt-7-Textures/OpenTK-Game.csproj",
+  "projectFilePath": "/home/frank/Desktop/code/c#/OpenTK-GameDev-YouTube/Pt-8-Camera-and-3D/OpenTK-Game.csproj",
   "expectedPackageFiles": [
     "/home/frank/.nuget/packages/opentk/4.9.3/opentk.4.9.3.nupkg.sha512",
     "/home/frank/.nuget/packages/opentk.audio.openal/4.9.3/opentk.audio.openal.4.9.3.nupkg.sha512",

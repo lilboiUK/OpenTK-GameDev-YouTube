@@ -40,11 +40,15 @@ public class MeshRenderer(GameObject gameObject) : Component(gameObject)
         GL.BindVertexArray(0);
     }
 
-    public void Render()
+    public void Render(Camera camera)
     {
         if (_material == null || _mesh == null) return;
+        
+        var model = gameObject.Transform.GetModelMatrix();
+        var view = camera.GetViewMatrix();
+        var projection = camera.GetProjectionMatrix();
 
-        _material.Apply(GameObject.Transform.GetModelMatrix());
+        _material.Apply(model * view * projection);
         GL.BindVertexArray(_vertexArrayObject);
         GL.DrawElements(PrimitiveType.Triangles, _mesh.Indices.Length, DrawElementsType.UnsignedInt, 0);
     }

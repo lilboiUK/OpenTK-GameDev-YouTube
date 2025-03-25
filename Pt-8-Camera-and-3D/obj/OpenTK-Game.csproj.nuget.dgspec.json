@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "/home/frank/Desktop/code/c#/OpenTK-GameDev-YouTube/Pt-7-Textures/OpenTK-Game.csproj": {}
+    "/home/frank/Desktop/code/c#/OpenTK-GameDev-YouTube/Pt-8-Camera-and-3D/OpenTK-Game.csproj": {}
   },
   "projects": {
-    "/home/frank/Desktop/code/c#/OpenTK-GameDev-YouTube/Pt-7-Textures/OpenTK-Game.csproj": {
+    "/home/frank/Desktop/code/c#/OpenTK-GameDev-YouTube/Pt-8-Camera-and-3D/OpenTK-Game.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/home/frank/Desktop/code/c#/OpenTK-GameDev-YouTube/Pt-7-Textures/OpenTK-Game.csproj",
+        "projectUniqueName": "/home/frank/Desktop/code/c#/OpenTK-GameDev-YouTube/Pt-8-Camera-and-3D/OpenTK-Game.csproj",
         "projectName": "OpenTK-Game",
-        "projectPath": "/home/frank/Desktop/code/c#/OpenTK-GameDev-YouTube/Pt-7-Textures/OpenTK-Game.csproj",
+        "projectPath": "/home/frank/Desktop/code/c#/OpenTK-GameDev-YouTube/Pt-8-Camera-and-3D/OpenTK-Game.csproj",
         "packagesPath": "/home/frank/.nuget/packages/",
-        "outputPath": "/home/frank/Desktop/code/c#/OpenTK-GameDev-YouTube/Pt-7-Textures/obj/",
+        "outputPath": "/home/frank/Desktop/code/c#/OpenTK-GameDev-YouTube/Pt-8-Camera-and-3D/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "/home/frank/.nuget/NuGet/NuGet.Config"
