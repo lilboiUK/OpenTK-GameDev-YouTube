@@ -14,11 +14,11 @@ public class MaterialProperty
     };
 
     private object _value;
-    
+
     public string Name { get; private set; }
     public int ShaderUniformLocation { get; private set; }
     public Type PropertyType { get; }
-    
+
     public object Value
     {
         get => _value;

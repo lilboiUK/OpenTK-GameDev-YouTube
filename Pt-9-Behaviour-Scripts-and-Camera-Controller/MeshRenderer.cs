@@ -43,7 +43,7 @@ public class MeshRenderer(GameObject gameObject) : Component(gameObject)
     public void Render(Camera camera)
     {
         if (_material == null || _mesh == null) return;
-        
+
         var model = gameObject.Transform.GetModelMatrix();
         var view = camera.GetViewMatrix();
         var projection = camera.GetProjectionMatrix();

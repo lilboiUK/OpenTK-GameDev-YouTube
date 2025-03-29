@@ -13,7 +13,7 @@ public class Material
         Shader = shader;
         UpdatePropertiesList();
     }
-    
+
     public void SetShader(Shader shader)
     {
         Shader = shader;

@@ -5,7 +5,7 @@ public class Component(GameObject gameObject)
     private bool _isEnabled = true;
     public readonly GameObject GameObject = gameObject;
     public readonly Transform Transform = gameObject.Transform;
-    
+
     public bool IsEnabled
     {
         get => _isEnabled;

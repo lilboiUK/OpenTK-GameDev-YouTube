@@ -4,18 +4,26 @@ namespace OpenTK_Game;
 
 public class Camera(GameObject gameObject) : Component(gameObject)
 {
-    public float AspectRatio = 1.0f;
-    public float VerticalFov = 45.0f;
-    public float NearClip = 0.1f;
-    public float FarClip = 1000.0f;
+    private float _fov = MathHelper.PiOver2;
+    public float AspectRatio { get; set; }
+
+    public float Fov
+    {
+        get => MathHelper.RadiansToDegrees(_fov);
+        set
+        {
+            var angle = MathHelper.Clamp(value, 1f, 999f);
+            _fov = MathHelper.DegreesToRadians(angle);
+        }
+    }
 
     public Matrix4 GetViewMatrix()
     {
-        return Matrix4.CreateTranslation(Transform.Position);
+        return Matrix4.LookAt(Transform.Position, Transform.Position + Transform.Forward, Transform.Up);
     }
 
     public Matrix4 GetProjectionMatrix()
     {
-        return Matrix4.CreatePerspectiveFieldOfView(MathHelper.DegreesToRadians(VerticalFov), AspectRatio, NearClip, FarClip);
+        return Matrix4.CreatePerspectiveFieldOfView(_fov, AspectRatio, 0.01f, 1000f);
     }
 }
