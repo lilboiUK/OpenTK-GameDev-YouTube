@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "NZrl57bdO9I=",
+  "dgSpecHash": "FzvMc3B6cAY=",
   "success": true,
-  "projectFilePath": "/home/frank/Desktop/code/c#/OpenTK-GameDev-YouTube/Pt-9-Behaviour-Scripts-and-Camera-Controller/OpenTK-Game.csproj",
+  "projectFilePath": "/home/frank/Desktop/code/c#/OpenTK-GameDev-YouTube/Pt-10-Directional-Light/OpenTK-Game.csproj",
   "expectedPackageFiles": [
     "/home/frank/.nuget/packages/opentk/4.9.3/opentk.4.9.3.nupkg.sha512",
     "/home/frank/.nuget/packages/opentk.audio.openal/4.9.3/opentk.audio.openal.4.9.3.nupkg.sha512",

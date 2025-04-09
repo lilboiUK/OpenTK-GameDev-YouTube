@@ -30,7 +30,6 @@ public class GameObject
         var component = (T)Activator.CreateInstance(typeof(T), this)!;
         _components.Add(component);
         if (IsActive) component.IsEnabled = true;
-        component.Start(); // Will have to modify for edit/play mode
         return component;
     }
 
@@ -63,8 +62,14 @@ public class GameObject
     {
         return _components.OfType<T>();
     }
+    
+    public void StartComponents()
+    {
+        if (!IsActive) return;
+        foreach (var component in _components.Where(component => component.IsEnabled)) component.Start();
+    }
 
-    public void Update()
+    public void UpdateComponents()
     {
         if (!IsActive) return;
         foreach (var component in _components.Where(component => component.IsEnabled)) component.Update();

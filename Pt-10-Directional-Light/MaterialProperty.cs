@@ -7,7 +7,8 @@ public class MaterialProperty
 {
     private static readonly Dictionary<Type, object> DefaultValues = new()
     {
-        { typeof(Vector4), Vector4.One },
+        { typeof(Vector2), Vector2.One },
+        { typeof(Vector3), Vector3.One },
         { typeof(Matrix4), Matrix4.Identity },
         { typeof(Texture), Texture.DefaultTexture() },
         { typeof(bool), false }
@@ -50,8 +51,10 @@ public class MaterialProperty
     {
         return activeUniformType switch
         {
-            ActiveUniformType.DoubleVec4 => typeof(Vector4),
-            ActiveUniformType.FloatVec4 => typeof(Vector4),
+            ActiveUniformType.DoubleVec2 => typeof(Vector2),
+            ActiveUniformType.FloatVec2 => typeof(Vector2),
+            ActiveUniformType.DoubleVec3 => typeof(Vector3),
+            ActiveUniformType.FloatVec3 => typeof(Vector3),
             ActiveUniformType.FloatMat4 => typeof(Matrix4),
             ActiveUniformType.Sampler2D => typeof(Texture),
             _ => throw new NotImplementedException(

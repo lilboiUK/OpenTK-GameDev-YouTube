@@ -31,8 +31,18 @@ public class Material
         _materialProperties.Clear();
         for (var i = 0; i < Shader.GetUniformsCount(); i++)
         {
+            // todo Find better solution
             var name = Shader.GetUniformName(i);
-            if (name == "transform") continue; // todo Find better solution
+            switch (name)
+            {
+                case "model":
+                case "view":
+                case "projection":
+                case "lightDir":
+                case "lightColor":
+                    continue;
+            }
+
             var location = Shader.GetUniformLocation(name);
             var activeUniformType = Shader.GetActiveUniformType(i);
             var materialProperty = new MaterialProperty(name, location, activeUniformType);
@@ -40,16 +50,17 @@ public class Material
         }
     }
 
-    public void Apply(Matrix4 modelViewProjectionMatrix)
+    public void Apply(Matrix4 model, Matrix4 view, Matrix4 projection, Light light)
     {
-        Shader.Use(modelViewProjectionMatrix);
+        Shader.Use(model, view, projection, light);
 
         foreach (var materialProperty in _materialProperties)
         {
             var location = materialProperty.ShaderUniformLocation;
             var value = materialProperty.Value;
 
-            if (materialProperty.PropertyType == typeof(Vector4)) GL.Uniform4(location, (Vector4)value);
+            if (materialProperty.PropertyType == typeof(Vector2)) GL.Uniform2(location, (Vector2)value);
+            if (materialProperty.PropertyType == typeof(Vector3)) GL.Uniform3(location, (Vector3)value);
             if (materialProperty.PropertyType == typeof(Texture)) ((Texture)value).Use(0);
             // todo Add more types
         }
